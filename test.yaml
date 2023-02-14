@@ -1,0 +1,43 @@
+apiVersion: v1 
+kind: Namespace
+metadata: 
+  name: ns-gwam-crnotionalui-dev
+  labels:
+    istio-injection: enabled
+    azure-key-vault-env-injection: enabled
+
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ns-resourcequota
+  namespace: ns-gwam-crnotionalui-dev
+spec:
+  hard:
+    requests.cpu: "30000m"
+    requests.memory: 50Gi
+    limits.cpu: "30000m"
+    limits.memory: 50Gi
+    
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: default-limit-range
+  namespace: ns-gwam-crnotionalui-dev
+spec:
+  limits:
+  - max:
+      cpu: "5000m"
+      memory: "15Gi"
+    min:
+      cpu: "100m"
+      memory: "128Mi"
+    default:
+      cpu: "1000m"
+      memory: "2Gi"
+    defaultRequest:
+      cpu: "100m"
+      memory: "128Mi"
+    type: Container
+   
