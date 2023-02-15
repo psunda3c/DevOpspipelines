@@ -1,0 +1,4 @@
+openssl req -out <Certname>.csr -new -newkey rsa:2048 -nodes -keyout <Certname>.key -subj "/C=CA/ST=Ontario/L=Waterloo/O=Manulife Financial/OU=GWAM Division/CN=<Certname>"
+
+openssl pkcs12 -export -out <Certname>.p12 -in <Certname>.cer -inkey <Certname>.key
+
